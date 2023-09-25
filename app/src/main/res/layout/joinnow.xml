@@ -5,33 +5,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <!-- text view to display selected items-->
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/selectWorkouts"
         android:layout_width="357dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
+        android:layout_marginBottom="360dp"
         android:background="@android:drawable/editbox_background"
         android:drawableRight="@android:drawable/arrow_down_float"
         android:drawablePadding="16dp"
-        android:hint="Select Language"
+        android:hint="Select Workouts"
         android:padding="12dp"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="421dp" />
-
-    <EditText
-        android:id="@+id/editTextID"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="ID"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/editTextUsername"
@@ -39,20 +33,27 @@
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:hint="Enter Name"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextID"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="114dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Password"
+        android:hint="Enter Password"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
@@ -60,46 +61,71 @@
         android:id="@+id/buttonInsert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_button"
         android:onClick="btnInsertPressed"
-        android:text="Insert"
-        app:layout_constraintEnd_toStartOf="@+id/buttonFetch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/buttonFetch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:onClick="btnFetchPressed"
-        android:text="Fetch"
+        android:text="JOIN"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/selectWorkouts"
         tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/buttonUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:onClick="btnUpdatePressed"
-        android:text="Update"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonFetch"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/buttonDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="btnDeletePressed"
-        android:text="Delete"
-        tools:ignore="UnknownId"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="642dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<EditText-->
+<!--android:id="@+id/editTextID"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="48dp"-->
+<!--android:layout_marginTop="220dp"-->
+<!--android:ems="10"-->
+<!--android:inputType="text"-->
+<!--android:text="ID"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintHorizontal_bias="0.497"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--<Button-->
+<!--android:id="@+id/buttonFetch"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginTop="12dp"-->
+<!--android:onClick="btnFetchPressed"-->
+<!--android:background="@drawable/custom_button"-->
+<!--android:text="Fetch"-->
+<!--app:backgroundTint="@null"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/editTextPassword"-->
+<!--tools:ignore="MissingConstraints" />-->
+
+<!--<Button-->
+<!--android:id="@+id/buttonUpdate"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginTop="12dp"-->
+<!--android:onClick="btnUpdatePressed"-->
+<!--android:background="@drawable/custom_button"-->
+<!--android:text="Update"-->
+<!--app:backgroundTint="@null"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toEndOf="@+id/buttonFetch"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/editTextPassword"-->
+<!--tools:ignore="MissingConstraints" />-->
+
+<!--<Button-->
+<!--android:id="@+id/buttonDelete"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:onClick="btnDeletePressed"-->
+<!--android:background="@drawable/custom_button"-->
+<!--android:text="Delete"-->
+<!--app:backgroundTint="@null"-->
+<!--app:layout_constraintBottom_toTopOf="@+id/textView"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintHorizontal_bias="0.503"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/buttonFetch"-->
+<!--app:layout_constraintVertical_bias="0.23"-->
+<!--tools:ignore="UnknownId" />-->

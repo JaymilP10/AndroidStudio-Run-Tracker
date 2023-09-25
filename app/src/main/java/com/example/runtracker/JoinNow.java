@@ -29,7 +29,7 @@ public class JoinNow extends AppCompatActivity {
     TextView textView;
     boolean[] selectedLanguage;
     ArrayList<Integer> langList = new ArrayList<>();
-    String[] langArray = {"Java", "C++", "Kotlin", "C", "Python", "Javascript"};
+    String[] langArray = {"Long Run (7 miles)", "Easy Run (3 miles)", "Intervals (12x400m)", "Tempo Run (4x1mile)", "Race (5k)"};
 
     EditText editUserID;
     EditText editUserName;
@@ -44,79 +44,8 @@ public class JoinNow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.joinnow);
 
-        editUserID = (EditText) findViewById(R.id.editTextID);
-        editUserName = (EditText) findViewById(R.id.editTextUsername);
-        editUserPassword = (EditText) findViewById(R.id.editTextPassword);
-
-        btnInsert = (Button) findViewById(R.id.buttonInsert);
-        btnFetch = (Button) findViewById(R.id.buttonFetch);
-        btnUpdate = (Button) findViewById(R.id.buttonUpdate);
-        btnDelete = (Button) findViewById(R.id.buttonDelete);
-
-        btnInsert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnInsertPressed(view);
-            }
-        });
-
-        btnFetch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnFetchPressed(view);
-            }
-        });
-
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnUpdatePressed(view);
-            }
-        });
-
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnDeletePressed(view);
-            }
-        });
-
-        dbManager = new DatabaseManager(this);
-        try {
-            dbManager.open();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void btnInsertPressed(View v){
-        dbManager.insert(editUserName.getText().toString(), editUserPassword.getText().toString());
-    }
-
-    public void btnFetchPressed(View v){
-        Cursor cursor = dbManager.fetch();
-
-        if (cursor.moveToFirst()){
-            do {
-                @SuppressLint("Range") String ID = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_ID));
-                @SuppressLint("Range") String username = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_NAME));
-                @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_PASSWORD));
-                Log.i("DATABASE_TAG", "I have read ID : " + ID + " Username : " + username + " password : " + password);
-
-            } while (cursor.moveToNext());
-        }
-    }
-
-    public void btnUpdatePressed(View v) {
-        dbManager.update(Long.parseLong(editUserID.getText().toString()), editUserName.getText().toString(), editUserPassword.getText().toString());
-    }
-
-    public void btnDeletePressed(View v){
-        dbManager.delete(Long.parseLong(editUserID.getText().toString()));
-    }
-
         // assign variable
-        textView = findViewById(R.id.textView);
+        textView = findViewById(R.id.selectWorkouts);
 
         // initialize selected language array
         selectedLanguage = new boolean[langArray.length];
@@ -129,7 +58,7 @@ public class JoinNow extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(JoinNow.this);
 
                 // set title
-                builder.setTitle("Select Language");
+                builder.setTitle("Select Workouts");
 
                 // set dialog non cancelable
                 builder.setCancelable(false);
@@ -199,5 +128,75 @@ public class JoinNow extends AppCompatActivity {
                 builder.show();
             }
         });
+
+//        editUserID = (EditText) findViewById(R.id.editTextID);
+        editUserName = (EditText) findViewById(R.id.editTextUsername);
+        editUserPassword = (EditText) findViewById(R.id.editTextPassword);
+
+        btnInsert = (Button) findViewById(R.id.buttonInsert);
+//        btnFetch = (Button) findViewById(R.id.buttonFetch);
+//        btnUpdate = (Button) findViewById(R.id.buttonUpdate);
+//        btnDelete = (Button) findViewById(R.id.buttonDelete);
+
+        btnInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnInsertPressed(view);
+            }
+        });
+
+//        btnFetch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btnFetchPressed(view);
+//            }
+//        });
+//
+//        btnUpdate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btnUpdatePressed(view);
+//            }
+//        });
+//
+//        btnDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btnDeletePressed(view);
+//            }
+//        });
+
+        dbManager = new DatabaseManager(this);
+        try {
+            dbManager.open();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void btnInsertPressed(View v){
+        dbManager.insert(editUserName.getText().toString(), editUserPassword.getText().toString());
+    }
+
+    public void btnFetchPressed(View v){
+        Cursor cursor = dbManager.fetch();
+
+        if (cursor.moveToFirst()){
+            do {
+                @SuppressLint("Range") String ID = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_ID));
+                @SuppressLint("Range") String username = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_NAME));
+                @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_PASSWORD));
+                Log.i("DATABASE_TAG", "I have read ID : " + ID + " Username : " + username + " password : " + password);
+
+            } while (cursor.moveToNext());
+        }
+    }
+
+    public void btnUpdatePressed(View v) {
+        dbManager.update(Long.parseLong(editUserID.getText().toString()), editUserName.getText().toString(), editUserPassword.getText().toString());
+    }
+
+    public void btnDeletePressed(View v){
+        dbManager.delete(Long.parseLong(editUserID.getText().toString()));
     }
 }
