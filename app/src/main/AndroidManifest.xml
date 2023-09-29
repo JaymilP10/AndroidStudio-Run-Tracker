@@ -25,6 +25,14 @@
             android:name=".JoinNow"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".StartRun"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".StopwatchActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

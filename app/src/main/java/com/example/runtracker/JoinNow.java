@@ -3,6 +3,7 @@ package com.example.runtracker;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,10 +27,18 @@ import java.util.Collections;
 public class JoinNow extends AppCompatActivity {
 
     // initialize variables
-    TextView textView;
-    boolean[] selectedLanguage;
+
+    Button join;
+    TextView textView, dropdown_menu;
+    boolean[] selectedWorkout;
+
+    boolean[] selectedRace;
     ArrayList<Integer> langList = new ArrayList<>();
+
+    ArrayList<Integer> raceList = new ArrayList<>();
     String[] langArray = {"Long Run (7 miles)", "Easy Run (3 miles)", "Intervals (12x400m)", "Tempo Run (4x1mile)", "Race (5k)"};
+
+    String[] raceArray = {"1 mile", "5K", "10K", "Half Marathon", "Marathon"};
 
     EditText editUserID;
     EditText editUserName;
@@ -46,9 +55,10 @@ public class JoinNow extends AppCompatActivity {
 
         // assign variable
         textView = findViewById(R.id.selectWorkouts);
+        dropdown_menu = findViewById(R.id.dropdown_menu);
 
         // initialize selected language array
-        selectedLanguage = new boolean[langArray.length];
+        selectedWorkout = new boolean[langArray.length];
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +73,7 @@ public class JoinNow extends AppCompatActivity {
                 // set dialog non cancelable
                 builder.setCancelable(false);
 
-                builder.setMultiChoiceItems(langArray, selectedLanguage, new DialogInterface.OnMultiChoiceClickListener() {
+                builder.setMultiChoiceItems(langArray, selectedWorkout, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i, boolean b) {
                         // check condition
@@ -114,13 +124,92 @@ public class JoinNow extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // use for loop
-                        for (int j = 0; j < selectedLanguage.length; j++) {
+                        for (int j = 0; j < selectedWorkout.length; j++) {
                             // remove all selection
-                            selectedLanguage[j] = false;
+                            selectedWorkout[j] = false;
                             // clear language list
                             langList.clear();
                             // clear text view value
                             textView.setText("");
+                        }
+                    }
+                });
+                // show dialog
+                builder.show();
+            }
+        });
+
+        dropdown_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Initialize alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(JoinNow.this);
+
+                // set title
+                builder.setTitle("Select Race");
+
+                // set dialog non cancelable
+                builder.setCancelable(false);
+
+                builder.setMultiChoiceItems(raceArray, selectedRace, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                        // check condition
+                        if (b) {
+                            // when checkbox selected
+                            // Add position in lang list
+                            raceList.add(i);
+                            // Sort array list
+                            Collections.sort(raceList);
+                        } else {
+                            // when checkbox unselected
+                            // Remove position from langList
+                            raceList.remove(Integer.valueOf(i));
+                        }
+                    }
+                });
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Initialize string builder
+                        StringBuilder stringBuilder = new StringBuilder();
+                        // use for loop
+                        for (int j = 0; j < raceList.size(); j++) {
+                            // concat array value
+                            stringBuilder.append(raceArray[raceList.get(j)]);
+                            // check condition
+                            if (j != raceList.size() - 1) {
+                                // When j value not equal
+                                // to lang list size - 1
+                                // add comma
+                                stringBuilder.append(", ");
+                            }
+                        }
+                        // set text on textView
+                        dropdown_menu.setText(stringBuilder.toString());
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // dismiss dialog
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // use for loop
+                        for (int j = 0; j < selectedRace.length; j++) {
+                            // remove all selection
+                            selectedRace[j] = false;
+                            // clear language list
+                            raceList.clear();
+                            // clear text view value
+                            dropdown_menu.setText("");
                         }
                     }
                 });
@@ -141,6 +230,8 @@ public class JoinNow extends AppCompatActivity {
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(JoinNow.this, StartRun.class);
+                startActivity(intent);
                 btnInsertPressed(view);
             }
         });
