@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
@@ -25,18 +26,27 @@ public class ProgressScreen extends AppCompatActivity {
 
         barChart = (BarChart) findViewById(R.id.bargraph);
 
-        ArrayList<String> theDates = new ArrayList<>();
-        theDates.add("January");
-        theDates.add("February");
-        theDates.add("March");
-        theDates.add("April");
-        theDates.add("May");
-        theDates.add("June");
-        theDates.add("July");
-        theDates.add("August");
-        theDates.add("September");
-        theDates.add("October");
-        theDates.add("November");
-        theDates.add("December");
+        ArrayList<String> theMonths = new ArrayList<>();
+        theMonths.add("January");
+        theMonths.add("February");
+        theMonths.add("March");
+        theMonths.add("April");
+        theMonths.add("May");
+        theMonths.add("June");
+        theMonths.add("July");
+        theMonths.add("August");
+        theMonths.add("September");
+        theMonths.add("October");
+        theMonths.add("November");
+        theMonths.add("December");
+
+        ArrayList<String> theDays = new ArrayList<>();
+        theDays.add("M");
+        theDays.add("T");
+        theDays.add("W");
+        theDays.add("T");
+        theDays.add("F");
+        theDays.add("S");
+        theDays.add("S");
     }
 }

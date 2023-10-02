@@ -5,6 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout_id"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="#000000"
+        app:tabMode="fixed"
+        app:tabTextColor="#000000">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="659dp" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Y"
+            tools:layout_editor_absoluteX="205dp"
+            tools:layout_editor_absoluteY="659dp" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"
+            tools:layout_editor_absoluteX="308dp"
+            tools:layout_editor_absoluteY="659dp" />
+    </com.google.android.material.tabs.TabLayout>
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="120dp"
@@ -76,18 +110,14 @@
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/bargraph"
-        android:layout_width="416dp"
-        android:layout_height="176dp"
+        android:layout_width="411dp"
+        android:layout_height="161dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="412dp"
-        android:layout_height="229dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout_id" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout_id"
+        app:layout_constraintVertical_bias="0.039" />
 
     <ImageView
         android:id="@+id/imageView4"
