@@ -1,7 +1,7 @@
 package com.example.runtracker;
 
-import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
 import android.os.Bundle;
@@ -73,7 +73,7 @@ public class StartRun extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(StartRun.this);
 
                 // set title
-                builder.setTitle("Select Workouts");
+                builder.setTitle("Select Workout");
 
                 // set dialog non cancelable
                 builder.setCancelable(false);
@@ -149,8 +149,8 @@ public class StartRun extends AppCompatActivity {
     // if it's about to be destroyed.
     @Override
     public void onSaveInstanceState(
-            Bundle savedInstanceState)
-    {
+            Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
         savedInstanceState
                 .putInt("seconds", seconds);
         savedInstanceState
@@ -189,6 +189,8 @@ public class StartRun extends AppCompatActivity {
     {
         if (running){
             running = false;
+            Intent intent = new Intent(StartRun.this, RunStats.class);
+            startActivity(intent);
         } else {
             running = true;
         }

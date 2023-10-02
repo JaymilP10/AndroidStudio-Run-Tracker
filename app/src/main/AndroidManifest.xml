@@ -30,7 +30,11 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".StopwatchActivity"
+            android:name=".CalendarScreen"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".RunStats"
             android:exported="true">
         </activity>
     </application>

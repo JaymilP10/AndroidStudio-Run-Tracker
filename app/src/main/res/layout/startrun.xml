@@ -11,16 +11,17 @@
         android:layout_width="118dp"
         android:layout_height="83dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="64dp"
-        android:onClick="onClickStart"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/round_button"
-        app:backgroundTint="@null"
+        android:onClick="onClickStart"
         android:text="START"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -62,6 +63,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_button"
+        android:text="Activity"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_button"
+        android:text="Run"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.684"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--<Button-->
@@ -97,3 +126,37 @@
 <!--app:layout_constraintEnd_toEndOf="parent"-->
 <!--app:layout_constraintHorizontal_bias="0.95"-->
 <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--<com.google.android.material.tabs.TabLayout-->
+<!--android:id="@+id/tabLayout2_id"-->
+<!--android:layout_width="409dp"-->
+<!--android:layout_height="wrap_content"-->
+<!--app:layout_constraintBottom_toBottomOf="parent"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:tabGravity="fill"-->
+<!--app:tabIndicatorColor="#000000"-->
+<!--app:tabMode="fixed"-->
+<!--app:tabTextColor="#000000">-->
+
+<!--<com.google.android.material.tabs.TabItem-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="Activity"-->
+<!--    tools:layout_editor_absoluteX="103dp"-->
+<!--    tools:layout_editor_absoluteY="659dp" />-->
+
+<!--<com.google.android.material.tabs.TabItem-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="Run"-->
+<!--    tools:layout_editor_absoluteX="205dp"-->
+<!--    tools:layout_editor_absoluteY="659dp" />-->
+
+<!--<com.google.android.material.tabs.TabItem-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="All"-->
+<!--    tools:layout_editor_absoluteX="308dp"-->
+<!--    tools:layout_editor_absoluteY="659dp" />-->
+<!--</com.google.android.material.tabs.TabLayout>-->

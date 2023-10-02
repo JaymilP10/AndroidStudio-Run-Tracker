@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.github.mikephil.charting.data.BarEntry;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.DateFormat;
@@ -166,6 +167,35 @@ public class SQLiteManager extends SQLiteOpenHelper {
         }
     }
 
+//    public ArrayList<BarEntry> getBarEntries() {
+//        String income_sum_column = "income_sum";
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String[] columns = new String[]{"SUM(income) AS " + income_sum_column, "income_category"};
+//        Cursor csr = db.query("Distance", columns, null, null, "income_category", null, null);
+//        ArrayList<BarEntry> rv = new ArrayList<>();
+//        while (csr.moveToNext()) {
+//            rv.add(new BarEntry(
+//                    csr.getInt(csr.getColumnIndex("income_category")),
+//                    csr.getFloat(csr.getColumnIndex(income_sum_column))
+//            ));
+//        }
+//        csr.close();
+//        return rv;
+//    }
+
+    public ArrayList<BarEntry> getBarEntries(){
+        ArrayList<BarEntry> dataVals = new ArrayList<>();
+        String[] columns = {"xValues", "yValues"};
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query("myTable", columns, null, null, null, null, null);
+
+        for (int i = 0; i < cursor.getCount(); i++) {
+            cursor.moveToNext();
+            dataVals.add(new BarEntry(cursor.getFloat(0), cursor.getFloat(1)));
+        }
+
+        return dataVals;
+    }
 //    @Override
 //    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 //
