@@ -8,17 +8,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DBHandler extends SQLiteOpenHelper {
+public class SQLiteManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "mydb";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_NAME = "sample_table";
-
+    private static final String COUNTER = "Counter";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_DISTANCE = "distance";
     public static final String COLUMN_DURATION = "duration";
@@ -31,15 +34,15 @@ public class DBHandler extends SQLiteOpenHelper {
     @SuppressLint("SimpleDateFormat")
     private static final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy:HH:mm:ss");
 
-    public static DBHandler instance;
+    public static SQLiteManager instance;
 
-    public DBHandler(Context context) {
+    public SQLiteManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static DBHandler getInstance(Context context) {
+    public static SQLiteManager getInstance(Context context) {
         if (instance == null) {
-            instance = new DBHandler(context);
+            instance = new SQLiteManager(context);
         }
         Log.d("DBHandler", "getInstance: " + instance);
         return instance;
@@ -48,11 +51,39 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String query = "CREATE TABLE " + TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_DISTANCE + " INTEGER, " + COLUMN_DURATION + " INTEGER, " + COLUMN_DATE + " TEXT, " +
-                COLUMN_LOCATION + " TEXT, " + COLUMN_WEATHER + " TEXT, " + COLUMN_TYPE + " TEXT, " + COLUMN_EFFORT + " INTEGER);";
+        StringBuilder sql;
+        sql = new StringBuilder()
+                .append("CREATE TABLE ")
+                .append(TABLE_NAME)
+                .append("(")
+                .append(COUNTER)
+                .append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
+                .append(COLUMN_ID)
+                .append(" INT, ")
+                .append(COLUMN_DISTANCE)
+                .append(" INT, ")
+                .append(COLUMN_DURATION)
+                .append(" INT, ")
+                .append(COLUMN_DATE)
+                .append(" TEXT, ")
+                .append(COLUMN_LOCATION)
+                .append(" TEXT, ")
+                .append(COLUMN_WEATHER)
+                .append(" TEXT, ")
+                .append(COLUMN_TYPE)
+                .append(" TEXT, ")
+                .append(COLUMN_EFFORT)
+                .append(" INT)");
 
-        db.execSQL(query);
+        db.execSQL(sql.toString());
+
+//        String query = "CREATE TABLE " + TABLE_NAME + " (" + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+//                + COLUMN_DISTANCE + " INTEGER, " + COLUMN_DURATION + " INTEGER, " + COLUMN_DATE + " TEXT, " +
+//                COLUMN_LOCATION + " TEXT, " + COLUMN_WEATHER + " TEXT, " + COLUMN_TYPE + " TEXT, " + COLUMN_EFFORT + " INTEGER);";
+
+//        db.execSQL(query);
+
+
 //        String createTableQuery = String.format(
 //                "CREATE TABLE %s (%s TEXT, %s INTEGER, %s TEXT)",
 //                TABLE_NAME, COLUMN_NAME, COLUMN_AGE, COLUMN_CONTENT);
@@ -89,7 +120,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 while (result.moveToNext())
                 {
                     int id = result.getInt(1);
-                    int distance = result.getInt(2);
+                    double distance = result.getDouble(2);
                     int duration = result.getInt(3);
                     Date date = getDateFromString(result.getString(4));
                     String location = result.getString(5);

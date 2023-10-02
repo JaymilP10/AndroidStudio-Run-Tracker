@@ -7,7 +7,7 @@ public class Note {
 
     public static ArrayList<Note> noteArrayList = new ArrayList<>();
     private int id;
-    private int distance;
+    private double distance;
     private int duration;
     private Date date;
     private String location;
@@ -15,7 +15,7 @@ public class Note {
     private String type;
     private int effort;
 
-    public Note(int id, int distance, int duration, Date date, String location, String weather, String type, int effort) {
+    public Note(int id, double distance, int duration, Date date, String location, String weather, String type, int effort) {
         this.id = id;
         this.distance = distance;
         this.duration = duration;
@@ -30,7 +30,7 @@ public class Note {
         return id;
     }
 
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
 

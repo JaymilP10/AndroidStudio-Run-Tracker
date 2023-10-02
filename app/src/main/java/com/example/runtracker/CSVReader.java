@@ -27,26 +27,26 @@ public class CSVReader {
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(","); // read the comma-separated line
 
-                String id = values[0];
-                int distance = Integer.parseInt(values[1]);
-                String duration = values[2];
+                int id = Integer.parseInt(values[0]);
+                double distance = Double.parseDouble(values[1]);
+                int duration = Integer.parseInt(values[2]);
                 String date = values[3];
                 String location = values[4];
                 String weather = values[5];
                 String type = values[6];
-                String effort = values[7];
+                int effort = Integer.parseInt(values[7]);
 
                 ContentValues contentValues = new ContentValues();
-                contentValues.put(DBHandler.COLUMN_ID, id);
-                contentValues.put(DBHandler.COLUMN_DISTANCE, distance);
-                contentValues.put(DBHandler.COLUMN_DURATION, duration);
-                contentValues.put(DBHandler.COLUMN_DATE, date);
-                contentValues.put(DBHandler.COLUMN_LOCATION, location);
-                contentValues.put(DBHandler.COLUMN_WEATHER, weather);
-                contentValues.put(DBHandler.COLUMN_TYPE, type);
-                contentValues.put(DBHandler.COLUMN_EFFORT, effort);
+                contentValues.put(SQLiteManager.COLUMN_ID, id);
+                contentValues.put(SQLiteManager.COLUMN_DISTANCE, distance);
+                contentValues.put(SQLiteManager.COLUMN_DURATION, duration);
+                contentValues.put(SQLiteManager.COLUMN_DATE, date);
+                contentValues.put(SQLiteManager.COLUMN_LOCATION, location);
+                contentValues.put(SQLiteManager.COLUMN_WEATHER, weather);
+                contentValues.put(SQLiteManager.COLUMN_TYPE, type);
+                contentValues.put(SQLiteManager.COLUMN_EFFORT, effort);
 
-                database.insert(DBHandler.TABLE_NAME, null, contentValues); // insert the values into the database
+                database.insert(SQLiteManager.TABLE_NAME, null, contentValues); // insert the values into the database
                 Log.d("CSV Insert", "Inserting: " + contentValues);
                 // content values are a map, but they make it easier opposed to doing it manually like INSERT INTO ...
             }

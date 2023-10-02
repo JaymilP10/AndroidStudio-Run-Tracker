@@ -2,16 +2,10 @@ package com.example.runtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,14 +26,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DBHandler.instance = new DBHandler(this);
+        SQLiteManager.instance = new SQLiteManager(this);
+        CSVReader.loadCSVFile(MainActivity.this, "sample.csv", SQLiteManager.instance.getWritableDatabase());
+        Toast.makeText(this, "Loaded CSV file into Database", Toast.LENGTH_SHORT).show();
+        SQLiteManager.instance.populateNoteListArray();
+
 
         Button button = findViewById(R.id.login);
         button.setOnClickListener(
                 (view) -> { // this is a lambda expression, just easier instead of the whole @Override nonsense
-                    CSVReader.loadCSVFile(MainActivity.this, "sample.csv", DBHandler.instance.getWritableDatabase());
+                    CSVReader.loadCSVFile(MainActivity.this, "sample.csv", SQLiteManager.instance.getWritableDatabase());
                     Toast.makeText(this, "Loaded CSV file into Database", Toast.LENGTH_SHORT).show();
                 });
+
+
+
 
 
 //        Button load = findViewById(R.id.show_entries);
