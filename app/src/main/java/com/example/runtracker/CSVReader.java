@@ -5,13 +5,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class CSVReader {
-    public static void loadCSVFile(Context context, String fileName, SQLiteDatabase database) {
+    public static void loadCSVFile(@NotNull Context context, @NotNull String fileName, @NotNull SQLiteDatabase database) {
         InputStream inputStream = null;
         InputStreamReader inputStreamReader = null;
         BufferedReader reader = null;
@@ -27,8 +29,17 @@ public class CSVReader {
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(","); // read the comma-separated line
 
+//                int id = Integer.parseInt(values[0]);
+//                double distance = Double.parseDouble(values[0]);
+//                int duration = Integer.parseInt(values[1]);
+//                String date = values[2];
+//                String location = values[3];
+//                String weather = values[4];
+//                String type = values[5];
+//                int effort = Integer.parseInt(values[6]);
+
                 int id = Integer.parseInt(values[0]);
-                double distance = Double.parseDouble(values[1]);
+                int distance = Integer.parseInt(values[1]);
                 int duration = Integer.parseInt(values[2]);
                 String date = values[3];
                 String location = values[4];

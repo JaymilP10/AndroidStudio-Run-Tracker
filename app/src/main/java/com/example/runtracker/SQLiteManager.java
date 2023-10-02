@@ -32,7 +32,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
     public static final String COLUMN_EFFORT = "effort";
 
     @SuppressLint("SimpleDateFormat")
-    private static final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy:HH:mm:ss");
+    private static final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
     public static SQLiteManager instance;
 
@@ -77,10 +77,10 @@ public class SQLiteManager extends SQLiteOpenHelper {
 
         db.execSQL(sql.toString());
 
-//        String query = "CREATE TABLE " + TABLE_NAME + " (" + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+//        String query = "CREATE TABLE " + TABLE_NAME + " (" + COUNTER + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_ID + " INTEGER, "
 //                + COLUMN_DISTANCE + " INTEGER, " + COLUMN_DURATION + " INTEGER, " + COLUMN_DATE + " TEXT, " +
 //                COLUMN_LOCATION + " TEXT, " + COLUMN_WEATHER + " TEXT, " + COLUMN_TYPE + " TEXT, " + COLUMN_EFFORT + " INTEGER);";
-
+//
 //        db.execSQL(query);
 
 
@@ -92,11 +92,23 @@ public class SQLiteManager extends SQLiteOpenHelper {
 //        Log.d("DBHandler", "onCreate: " + createTableQuery);
     }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion)
+    {
+//        switch (oldVersion)
+//        {
+//            case 1:
+//                sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + NEW_COLUMN + " TEXT");
+//            case 2:
+//                sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + NEW_COLUMN + " TEXT");
+//        }
+    }
+
     public void addNoteToDatabase(Note note){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_ID, note.getId());
+//        contentValues.put(COLUMN_ID, note.getId());
         contentValues.put(COLUMN_DISTANCE, note.getDistance());
         contentValues.put(COLUMN_DURATION, note.getDuration());
         contentValues.put(COLUMN_DATE, getStringFromDate(note.getDate()));
@@ -120,7 +132,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 while (result.moveToNext())
                 {
                     int id = result.getInt(1);
-                    double distance = result.getDouble(2);
+                    int distance = result.getInt(2);
                     int duration = result.getInt(3);
                     Date date = getDateFromString(result.getString(4));
                     String location = result.getString(5);
@@ -154,29 +166,29 @@ public class SQLiteManager extends SQLiteOpenHelper {
         }
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
-
-    public ArrayList<String> getAll() {
-        String select = String.format("SELECT * FROM %s", TABLE_NAME);
-        SQLiteDatabase database = getReadableDatabase();
-        Cursor cursor = database.rawQuery(select, null);
-        ArrayList<String> returnThingy = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            String firstName = cursor.getString(0); // same indices as the csv / create table query
-            int age = cursor.getInt(1);
-            String content = cursor.getString(2);
-            returnThingy.add("name: " + firstName + " age: " + age + " content: " + content);
-        }
-        cursor.close();
-        database.close();
-        return returnThingy;
-    }
-
-    public void deleteAll() {
-        String delete = String.format("DELETE FROM %s", TABLE_NAME);
-        SQLiteDatabase database = getWritableDatabase();
-        database.execSQL(delete);
-        database.close();
-    }
+//    @Override
+//    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+//
+//    public ArrayList<String> getAll() {
+//        String select = String.format("SELECT * FROM %s", TABLE_NAME);
+//        SQLiteDatabase database = getReadableDatabase();
+//        Cursor cursor = database.rawQuery(select, null);
+//        ArrayList<String> returnThingy = new ArrayList<>();
+//        while (cursor.moveToNext()) {
+//            String firstName = cursor.getString(0); // same indices as the csv / create table query
+//            int age = cursor.getInt(1);
+//            String content = cursor.getString(2);
+//            returnThingy.add("name: " + firstName + " age: " + age + " content: " + content);
+//        }
+//        cursor.close();
+//        database.close();
+//        return returnThingy;
+//    }
+//
+//    public void deleteAll() {
+//        String delete = String.format("DELETE FROM %s", TABLE_NAME);
+//        SQLiteDatabase database = getWritableDatabase();
+//        database.execSQL(delete);
+//        database.close();
+//    }
 }
